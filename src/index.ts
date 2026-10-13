@@ -8,7 +8,7 @@ async function main(message: string) {
   return result.text;
 }
 
-main("Open Notepad")
+main("Open arroxy")
   .then((message) => {
     console.log(message);
   })
