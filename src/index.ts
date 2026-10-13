@@ -8,7 +8,7 @@ async function main(message: string) {
   return result.text;
 }
 
-main("Open arroxy")
+main("restore")
   .then((message) => {
     console.log(message);
   })

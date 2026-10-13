@@ -1,11 +1,13 @@
 import { ToolLoopAgent } from "ai";
 import { aiModel } from "../ai/model";
 import { searchApplicationTool } from "./search-application.agent";
+import { windowManagerAgentTool } from "./window-manager.agent";
 
 export const mainAgent = new ToolLoopAgent({
   model: aiModel,
   tools: {
     searchApplication: searchApplicationTool,
+    windowManagement: windowManagerAgentTool,
   },
   instructions: ` You are a desktop assistant.
       Always use the searchApplication tool when the user asks to open an application.
@@ -13,5 +15,7 @@ export const mainAgent = new ToolLoopAgent({
       If the tool says the application was not found, clearly tell the user that
       the application was not found and may not be installed.
       Never claim an application was opened if the tool did not confirm the open action.
-      Keep your response concise.`,
+      Keep your response concise.
+      Use the window manager tool to perform actions like minimize, maximize, restore or close.
+      `,
 });
