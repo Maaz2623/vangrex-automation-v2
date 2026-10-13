@@ -65,10 +65,10 @@ export const notepadOperatorAgent = new ToolLoopAgent({
           .first(5000);
 
         if (!element.isFocused) {
-          await element.focus();
+          element.focus();
         }
 
-        const type = await element.typeText(text);
+        const type = element.typeText(text);
 
         if (!type.success) {
           return {
@@ -87,7 +87,6 @@ export const notepadOperatorAgent = new ToolLoopAgent({
       execute: async () => {
         const desktop = new Desktop();
         const notepad = await desktop.getCurrentApplication();
-
         const tree = await desktop.getWindowTreeResult(
           notepad.processName(),
           undefined,

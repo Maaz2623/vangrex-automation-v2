@@ -8,7 +8,9 @@ async function main(message: string) {
   return result.text;
 }
 
-main("Create a panchatantra-example.txt with 10 lines of story inside it. with a heading in BOLD")
+main(
+  "In vscode open recents and select vangrex automation v2. then git push from the ui.",
+)
   .then((message) => {
     console.log(message);
   })

@@ -3,6 +3,7 @@ import { aiModel } from "../ai/model";
 import { searchApplicationTool } from "./search-application.agent";
 import { windowManagerAgentTool } from "./window-manager.agent";
 import { notepadOperatorAgentTool } from "./notepad-operator.agent";
+import { vscodeOperatorAgentTool } from "./vscode-operator.agent";
 
 export const mainAgent = new ToolLoopAgent({
   model: aiModel,
@@ -10,6 +11,7 @@ export const mainAgent = new ToolLoopAgent({
     searchApplication: searchApplicationTool,
     windowManagement: windowManagerAgentTool,
     notepadOperatorAgent: notepadOperatorAgentTool,
+    vscodeOperatorAgent: vscodeOperatorAgentTool,
   },
   instructions: ` You are a desktop assistant.
       Always use the searchApplication tool when the user asks to open an application.
@@ -21,5 +23,7 @@ export const mainAgent = new ToolLoopAgent({
       Use the window manager tool to perform actions like minimize, maximize, restore or close.
 
       If user wants to get things done related to creating text files or something. Intelligently Understand and use notepadOperatorAgent.
+
+      If user wants to operate vscode. Use the vscodeOperatorAgent.
       `,
 });
