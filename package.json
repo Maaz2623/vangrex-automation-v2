@@ -1,0 +1,20 @@
+{
+  "name": "vangrex-automation-v2",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^26.6.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^4.0.94",
+    "@ai-sdk/workflow": "^2.0.70",
+    "@mediar-ai/terminator": "^0.24.32",
+    "ai": "^7.0.138",
+    "zod": "^4.6.7"
+  }
+}
