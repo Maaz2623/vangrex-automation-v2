@@ -15,4 +15,18 @@ const tree = await desktop.getWindowTreeResult(
   },
 );
 
-console.log(tree.formatted);
+const element = await notepad
+  .locator(`role:Button|name:Toggle Chat`)
+  .first(2000);
+
+const clicked = await element.click({
+  uiDiffBeforeAfter: true,
+});
+
+console.log(clicked.uiDiff?.diff);
+
+const secondClick = await element.click({
+  uiDiffBeforeAfter: true,
+});
+
+console.log(secondClick.uiDiff?.diff);
