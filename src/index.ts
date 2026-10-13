@@ -8,7 +8,7 @@ async function main(message: string) {
   return result.text;
 }
 
-main("restore")
+main("Open notepad and maximize it.")
   .then((message) => {
     console.log(message);
   })
