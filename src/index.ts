@@ -8,7 +8,7 @@ async function main(message: string) {
   return result.text;
 }
 
-main("Open notepad and maximize it.")
+main("Create a panchatantra-example.txt with 10 lines of story inside it. with a heading in BOLD")
   .then((message) => {
     console.log(message);
   })
