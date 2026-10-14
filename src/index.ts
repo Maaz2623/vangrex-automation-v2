@@ -9,7 +9,7 @@ async function main(message: string) {
 }
 
 main(
-  "In vscode open recents and select vangrex automation v2. then git push from the ui.",
+  "Open notepad and type a 10 line panchatantra story and save it as story1.txt",
 )
   .then((message) => {
     console.log(message);

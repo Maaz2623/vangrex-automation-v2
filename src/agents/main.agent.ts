@@ -1,4 +1,4 @@
-import { ToolLoopAgent } from "ai";
+import { isStepCount, ToolLoopAgent } from "ai";
 import { aiModel } from "../ai/model";
 import { searchApplicationTool } from "./search-application.agent";
 import { windowManagerAgentTool } from "./window-manager.agent";
@@ -14,6 +14,7 @@ export const mainAgent = new ToolLoopAgent({
     notepadOperatorAgent: notepadOperatorAgentTool,
     vscodeOperatorAgent: vscodeOperatorAgentTool,
   },
+  stopWhen: isStepCount(100),
   instructions: ` You are a desktop assistant.
       Always use the searchApplication tool when the user asks to open an application.
       Read the tool result carefully.
