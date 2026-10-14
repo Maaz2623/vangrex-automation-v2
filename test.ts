@@ -1,32 +1,31 @@
 import { Desktop } from "@mediar-ai/terminator";
 import * as Terminator from "@mediar-ai/terminator";
-
 const desktop = new Desktop();
 
-const notepad = await desktop.getCurrentApplication();
+await desktop.pressKey("Win");
+
+const searchLocator = desktop.locator("role:Text|name:Search");
+const searchBox = await searchLocator.first(5000);
+
+await searchBox.typeText("Chrome", {
+  clearBeforeTyping: true,
+});
+
+await new Promise((resolve) => setTimeout(resolve, 1500));
+
+const searchWindowLocator = desktop.locator("role:Window|name:Search");
+const searchWindow = await searchWindowLocator.first(5000);
 
 const tree = await desktop.getWindowTreeResult(
-  notepad.processName(),
+  searchWindow.processName(),
   undefined,
   {
+    propertyMode: Terminator.PropertyLoadingMode.Smart,
     formatOutput: true,
-    propertyMode: Terminator.PropertyLoadingMode.Complete,
     treeOutputFormat: Terminator.TreeOutputFormat.CompactYaml,
   },
 );
 
-const element = await notepad
-  .locator(`role:Button|name:Toggle Chat`)
-  .first(2000);
+const formattedTree = tree.formatted;
 
-const clicked = await element.click({
-  uiDiffBeforeAfter: true,
-});
-
-console.log(clicked.uiDiff?.diff);
-
-const secondClick = await element.click({
-  uiDiffBeforeAfter: true,
-});
-
-console.log(secondClick.uiDiff?.diff);
+console.log(formattedTree);

@@ -5,6 +5,7 @@ import { windowManagerAgentTool } from "./window-manager.agent";
 import { vscodeOperatorAgentTool } from "./vscode-operator.agent";
 import { google } from "@ai-sdk/google";
 import { notepadOperatorAgentTool } from "./notepad-operator/notepad-operator.agent";
+import { browserAgentTool } from "./browser-operator/browser-operator.agent";
 
 export const mainAgent = new ToolLoopAgent({
   model: aiModel,
@@ -13,6 +14,7 @@ export const mainAgent = new ToolLoopAgent({
     windowManagement: windowManagerAgentTool,
     notepadOperatorAgent: notepadOperatorAgentTool,
     vscodeOperatorAgent: vscodeOperatorAgentTool,
+    browserAgent: browserAgentTool,
   },
   stopWhen: isStepCount(100),
   instructions: ` You are a desktop assistant.
@@ -27,5 +29,7 @@ export const mainAgent = new ToolLoopAgent({
       If user wants to get things done related to creating text files or something. Intelligently Understand and use notepadOperatorAgent.
 
       If user wants to operate vscode. Use the vscodeOperatorAgent.
+
+      If user wants to operate browser related stuff. use the browserAgent
       `,
 });

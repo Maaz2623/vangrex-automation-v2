@@ -7,8 +7,33 @@ import * as Terminator from "@mediar-ai/terminator";
 export const searchApplicationAgent = new ToolLoopAgent({
   model: aiModel,
   instructions:
-    "Search Windows Search for the requested application. If it appears as an App result, open it. Ignore Web search results. If no matching App result exists, report that the application was not found.",
+    "Search Windows Search for the requested application. If it appears as an App with full app name under result, click it by using clickApplication tool. Ignore Web search results. If no matching App result exists, report that the application was not found.",
   tools: {
+    clickApplication: tool({
+      description: "Used to click the application if found only.",
+      inputSchema: z.object({
+        elementName: z
+          .string()
+          .describe("Can appear as Name of the application searched."),
+        elementRole: z
+          .string()
+          .describe("Can appear as listitem or button or text or anything."),
+      }),
+      execute: async ({ elementName, elementRole }) => {
+        const desktop = new Desktop();
+
+        const element = await desktop
+          .locator(`role:${elementRole}|name:${elementName}`)
+          .first(5000);
+
+        const clicked = await element.click();
+
+        return {
+          message: "Application opened",
+          uiDiff: clicked.uiDiff,
+        };
+      },
+    }),
     searchApplication: tool({
       description:
         "Search for an application in Windows Search. Open it only if a matching App result exists. Ignore web results.",
@@ -44,30 +69,9 @@ export const searchApplicationAgent = new ToolLoopAgent({
 
         const formattedTree = tree.formatted;
 
-        const escapeRegExp = (value: string) =>
-          value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-        const escapedName = escapeRegExp(applicationName);
-
-        const appResultPattern = new RegExp(
-          `\\[ListItem\\]\\s+${escapedName}\\s*,\\s*App\\b`,
-          "i",
-        );
-
-        if (!appResultPattern.test(formattedTree as string)) {
-          return `Could not find "${applicationName}" in Windows Search Apps. It may not be installed.`;
-        }
-
-        const openButtonLocator = desktop.locator("role:Button|name:Open");
-
-        try {
-          const openButton = await openButtonLocator.first(3000);
-          await openButton.click();
-
-          return `Clicked Open for "${applicationName}".`;
-        } catch {
-          return `Found "${applicationName}" in Apps, but could not find or click its Open button.`;
-        }
+        return {
+          searchResults: formattedTree,
+        };
       },
     }),
   },
