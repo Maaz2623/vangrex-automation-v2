@@ -30,6 +30,6 @@ export const mainAgent = new ToolLoopAgent({
 
       If user wants to operate vscode. Use the vscodeOperatorAgent.
 
-      If user wants to operate browser related stuff. use the browserAgent
+      If user wants to operate browser related stuff. use the searchApplicationAgent to first search and open the browser. If no specific browser name is asked to open, fallback and search just for browser and open the first result.
       `,
 });

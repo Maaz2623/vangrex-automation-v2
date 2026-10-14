@@ -7,7 +7,7 @@ import * as Terminator from "@mediar-ai/terminator";
 export const searchApplicationAgent = new ToolLoopAgent({
   model: aiModel,
   instructions:
-    "Search Windows Search for the requested application. If it appears as an App with full app name under result, click it by using clickApplication tool. Ignore Web search results. If no matching App result exists, report that the application was not found.",
+    "Search Windows Search for the requested application. If it appears as an App with full app name under result, click it by using clickApplication tool. Ignore Web search results. If a general app is searched with no specific name e.g such as browser, search for it and open the first app u find but only if it is relatable or an alternative.",
   tools: {
     clickApplication: tool({
       description: "Used to click the application if found only.",
@@ -88,6 +88,10 @@ export const searchApplicationTool = tool({
       prompt: `Search for "${applicationName}" and open it if it exists as an App result. If it is not found, return exactly: NOT_INSTALLED: ${applicationName}`,
     });
 
-    return result.text;
+    if (result.text.includes("NOT_INSTALLED:")) {
+      return result.text;
+    }
+
+    return `I've opened ${applicationName} for you.`;
   },
 });
