@@ -4,6 +4,7 @@ import { searchApplicationTool } from "./search-application.agent";
 import { windowManagerAgentTool } from "./window-manager.agent";
 import { notepadOperatorAgentTool } from "./notepad-operator.agent";
 import { vscodeOperatorAgentTool } from "./vscode-operator.agent";
+import { google } from "@ai-sdk/google";
 
 export const mainAgent = new ToolLoopAgent({
   model: aiModel,

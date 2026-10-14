@@ -38,7 +38,6 @@ export const notepadOperatorAgent = new ToolLoopAgent({
           element.focus();
         }
         const click = await element.click();
-
         return {
           message: `Agent Clicked ${elementName}`,
           actionResult: { ...click },
@@ -78,6 +77,7 @@ export const notepadOperatorAgent = new ToolLoopAgent({
 
         return {
           message: "Agent completed typing successfully.",
+          actionResult: {...type}
         };
       },
     }),
