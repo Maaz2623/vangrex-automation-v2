@@ -2,9 +2,9 @@ import { isStepCount, ToolLoopAgent } from "ai";
 import { aiModel } from "../ai/model";
 import { searchApplicationTool } from "./search-application.agent";
 import { windowManagerAgentTool } from "./window-manager.agent";
-import { notepadOperatorAgentTool } from "./notepad-operator.agent";
 import { vscodeOperatorAgentTool } from "./vscode-operator.agent";
 import { google } from "@ai-sdk/google";
+import { notepadOperatorAgentTool } from "./notepad-operator/notepad-operator.agent";
 
 export const mainAgent = new ToolLoopAgent({
   model: aiModel,

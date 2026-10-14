@@ -8,9 +8,7 @@ async function main(message: string) {
   return result.text;
 }
 
-main(
-  "Open notepad and type a 10 line panchatantra story and save it as story1.txt",
-)
+main("Open vscode and change theme to light.")
   .then((message) => {
     console.log(message);
   })

@@ -1,10 +1,9 @@
 import { isStepCount, tool, ToolLoopAgent } from "ai";
-import { aiModel } from "../ai/model";
-import { searchApplicationTool } from "./search-application.agent";
 import z from "zod";
 import { Desktop } from "@mediar-ai/terminator";
 import * as Terminator from "@mediar-ai/terminator";
 import { NOTEPAD_AGENT_INSTRUCTIONS } from "./instructions";
+import { aiModel } from "../../ai/model";
 
 export const notepadOperatorAgent = new ToolLoopAgent({
   model: aiModel,
